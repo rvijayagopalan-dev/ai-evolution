@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import LearnTab from './LearnTab'
+import { learnContent } from './learnData'
 
 const TABS = [
   { id: 'overview',   label: 'Overview',     icon: '📋' },
@@ -8,6 +10,7 @@ const TABS = [
   { id: 'players',    label: 'Key Players',   icon: '🏢' },
   { id: 'milestones', label: 'Timeline',      icon: '📅' },
   { id: 'impact',     label: 'Impact',        icon: '🚀' },
+  { id: 'learn',      label: 'Learn',         icon: '🎓' },
 ]
 
 export default function EraDetailTabs({ era }) {
@@ -43,6 +46,7 @@ export default function EraDetailTabs({ era }) {
         {active === 'players'    && <PlayersTab  d={d} accent={accent} />}
         {active === 'milestones' && <MilestonesTab d={d} accent={accent} />}
         {active === 'impact'     && <ImpactTab   d={d} accent={accent} />}
+        {active === 'learn'      && <LearnTab d={learnContent[era.id]} accent={accent} />}
       </div>
     </div>
   )
