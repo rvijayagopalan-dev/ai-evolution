@@ -177,6 +177,24 @@ export default async function EraPage({ params }) {
         <EraDetailTabs era={era} />
       </div>
 
+      {/* Author credit bar */}
+      <div className="border-t border-slate-800/60 bg-slate-950/80">
+        <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p className="text-xs text-slate-600">
+            Research by{' '}
+            <a
+              href="https://www.linkedin.com/in/rvijayagopalan"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-white transition-colors font-medium"
+            >
+              Vijayagopalan Raveendran
+            </a>
+          </p>
+          <p className="text-xs text-slate-700">© 2026 AI Evolution. All rights reserved.</p>
+        </div>
+      </div>
+
       {/* Next era CTA */}
       {next && (
         <div className="border-t border-slate-800 bg-slate-900/30">
