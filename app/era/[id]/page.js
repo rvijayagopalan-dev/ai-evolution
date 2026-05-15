@@ -8,7 +8,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const era = eras.find(e => e.id === parseInt(params.id))
+  const { id } = await params
+  const era = eras.find(e => e.id === parseInt(id))
   if (!era) return {}
   return {
     title: `Era ${era.number}: ${era.title} (${era.years}) — AI Evolution`,
@@ -16,8 +17,9 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function EraPage({ params }) {
-  const era = eras.find(e => e.id === parseInt(params.id))
+export default async function EraPage({ params }) {
+  const { id } = await params
+  const era = eras.find(e => e.id === parseInt(id))
   if (!era) notFound()
 
   const prev = eras.find(e => e.id === era.id - 1)
