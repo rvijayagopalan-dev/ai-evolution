@@ -18,6 +18,67 @@ export const eras = [
     leadingCompanies: ['Google Research'],
     gap: 'Transformers enabled language understanding but lacked generation autonomy, reasoning capability, and foundation model scaling.',
     leadsTo: 'Generative AI',
+    detail: {
+      overview: {
+        summary: 'The Transformer architecture, introduced in the landmark 2017 paper "Attention Is All You Need" by researchers at Google Brain, fundamentally changed how machines process sequential data. Before Transformers, the dominant architectures for natural language processing were Recurrent Neural Networks (RNNs) and Long Short-Term Memory networks (LSTMs), which processed text word by word in sequence.',
+        why: 'Transformers replaced sequential processing with parallel processing via the attention mechanism — allowing the model to look at all words in a sentence simultaneously and weigh their relationships. This was both faster to train and dramatically more effective at capturing long-range dependencies in language.',
+        significance: 'Every major AI system today — GPT-4, Claude, Gemini, LLaMA — is built on the Transformer architecture. The 2017 paper is arguably the most consequential AI research publication of the past decade.',
+        quote: '"Attention Is All You Need" — Google Brain, 2017',
+      },
+      concepts: [
+        {
+          title: 'Self-Attention Mechanism',
+          explanation: 'Self-attention allows the model to weigh the relevance of every word in a sentence relative to every other word. When processing "The animal didn\'t cross the street because it was tired," the model uses attention to determine that "it" refers to "animal," not "street." Each word attends to all others with learned weights.',
+        },
+        {
+          title: 'Multi-Head Attention',
+          explanation: 'Instead of computing one attention score, Transformers compute multiple attention "heads" in parallel — each learning to attend to different types of relationships (e.g., one head tracks syntactic structure, another tracks semantic similarity). The outputs of all heads are concatenated and projected.',
+        },
+        {
+          title: 'Positional Encoding',
+          explanation: 'Since attention is position-agnostic (it sees all tokens simultaneously), positional encodings are added to input embeddings to inject information about each token\'s position in the sequence. This allows the model to understand word order.',
+        },
+        {
+          title: 'Encoder-Decoder Architecture',
+          explanation: 'The original Transformer had two stacks: an encoder that reads and represents the input, and a decoder that generates the output. The decoder uses cross-attention to attend to encoder representations while generating each output token. Modern LLMs typically use decoder-only architectures (GPT) or encoder-only (BERT).',
+        },
+        {
+          title: 'Feed-Forward Layers',
+          explanation: 'Between attention layers, each position passes through an identical feed-forward network. These layers are responsible for the "knowledge" the model stores — the vast majority of a Transformer\'s parameters are in feed-forward layers.',
+        },
+        {
+          title: 'Layer Normalization & Residual Connections',
+          explanation: 'These training stability techniques allow Transformers to be stacked very deep (dozens to hundreds of layers) without gradient vanishing. Residual connections carry the original input directly around each sub-layer, enabling gradients to flow through the full depth of the network.',
+        },
+      ],
+      players: [
+        { name: 'Google Brain', type: 'Lab', contribution: 'Authored the original paper; developed BERT and T5 on the Transformer architecture', url: 'Google Research' },
+        { name: 'Ashish Vaswani', type: 'Researcher', contribution: 'Lead author of "Attention Is All You Need"' },
+        { name: 'Noam Shazeer', type: 'Researcher', contribution: 'Co-author; later co-founded Character.AI' },
+        { name: 'Aidan Gomez', type: 'Researcher', contribution: 'Co-author; later founded Cohere' },
+        { name: 'Illia Polosukhin', type: 'Researcher', contribution: 'Co-author; later co-founded NEAR Protocol' },
+        { name: 'Jakob Uszkoreit', type: 'Researcher', contribution: 'Co-author; later co-founded Inceptive' },
+      ],
+      milestones: [
+        { year: 'Jun 2017', event: '"Attention Is All You Need" published on arXiv' },
+        { year: 'Dec 2017', event: 'Paper presented at NeurIPS 2017' },
+        { year: 'Oct 2018', event: 'BERT (Google) uses Transformer encoder for language understanding' },
+        { year: '2019', event: 'Transformer architectures dominate NLP benchmarks across all tasks' },
+        { year: '2020', event: 'Transformers adopted for vision (ViT), audio, and multimodal tasks' },
+        { year: '2024', event: 'Paper becomes one of the most cited in AI history (100,000+ citations)' },
+      ],
+      impact: {
+        enabled: [
+          'All modern large language models (GPT, Claude, Gemini, LLaMA)',
+          'BERT and derivative models for search, classification, and retrieval',
+          'Vision Transformers (ViT) — applying attention to image patches',
+          'Multimodal models combining vision and language',
+          'AlphaFold 2 — protein structure prediction using Transformer attention',
+        ],
+        changed: 'Before Transformers, state-of-the-art NLP required task-specific architectures trained from scratch on each task. Transformers made pre-training on large corpora and fine-tuning on specific tasks the dominant paradigm — unlocking transfer learning at scale.',
+        industry: 'Every major technology company reorganized their AI strategy around Transformers from 2018 onward. Google, Meta, Microsoft, Amazon, and dozens of startups all pivoted to Transformer-based foundation models.',
+      },
+    },
   },
   {
     id: 2,
@@ -43,6 +104,72 @@ export const eras = [
     leadingCompanies: ['OpenAI', 'Anthropic', 'Meta AI', 'Google DeepMind'],
     gap: 'Lacked planning, reasoning, autonomy, multi-step experience, and the ability to execute real-world actions.',
     leadsTo: 'Agentic AI',
+    detail: {
+      overview: {
+        summary: 'The Generative AI Era transformed the Transformer from a research architecture into the engine of a new computing paradigm. OpenAI\'s GPT series demonstrated that scaling a decoder-only Transformer on internet-scale text data produced emergent capabilities far beyond what the training objective suggested. By the time ChatGPT launched in November 2022, generative AI had become a consumer phenomenon — 100 million users in 2 months, the fastest product adoption in history.',
+        why: 'The key insight was scale. GPT-3\'s 175 billion parameters (1000× larger than GPT-1) exhibited in-context learning — the ability to perform tasks from a few examples without any gradient updates. This "emergent" capability was not predicted by the scaling laws that governed smaller models.',
+        significance: 'Generative AI made AI accessible to everyone. For the first time, anyone could interact with a highly capable AI system in natural language. It shifted AI from a specialist tool to a general-purpose interface.',
+        quote: '"GPT-3 can write code, essays, poetry, and answer questions — all from the same model." — OpenAI, 2020',
+      },
+      concepts: [
+        {
+          title: 'Foundation Models',
+          explanation: 'A single large model pre-trained on broad data that can be adapted for many tasks. Instead of training a separate model for translation, summarization, and Q&A, one foundation model handles all of them — either via fine-tuning or prompting alone.',
+        },
+        {
+          title: 'Next-Token Prediction (Autoregressive LM)',
+          explanation: 'The training objective for GPT models is simple: predict the next token given all previous tokens. Despite this simple objective, at sufficient scale it forces the model to learn grammar, facts, reasoning, coding, and much more as implicit sub-problems.',
+        },
+        {
+          title: 'In-Context Learning',
+          explanation: 'GPT-3 demonstrated that you can teach a model to do a new task by simply showing it examples in the prompt — no gradient updates required. Provide 3 examples of English → French translation, and the model continues the pattern. This "few-shot learning" emerges at large scale.',
+        },
+        {
+          title: 'RLHF (Reinforcement Learning from Human Feedback)',
+          explanation: 'The technique that made ChatGPT work. After pre-training, human raters rank model outputs. A reward model is trained on these rankings, and the LLM is fine-tuned via PPO (Proximal Policy Optimization) to maximize the reward model\'s score. This aligns the model to produce helpful, harmless, honest responses.',
+        },
+        {
+          title: 'Emergent Capabilities',
+          explanation: 'Capabilities that appear suddenly as model scale increases — not present at smaller scales and not predictable by extrapolating from smaller models. Examples include multi-step arithmetic, chain-of-thought reasoning, and language translation — none of which were explicitly trained for.',
+        },
+        {
+          title: 'Instruction Tuning',
+          explanation: 'Fine-tuning a pre-trained model on a large set of (instruction, response) pairs across diverse tasks. This makes the model much better at following natural language instructions, even for tasks not seen during instruction tuning. The base model\'s broad knowledge is retained while instruction-following behavior is sharpened.',
+        },
+      ],
+      players: [
+        { name: 'OpenAI', type: 'Lab', contribution: 'GPT-1 through GPT-4; ChatGPT; DALL-E; Codex; RLHF technique' },
+        { name: 'Anthropic', type: 'Lab', contribution: 'Constitutional AI; Claude model family; safety research' },
+        { name: 'Google DeepMind', type: 'Lab', contribution: 'PaLM, Gemini; AlphaCode; multimodal research' },
+        { name: 'Meta AI', type: 'Lab', contribution: 'LLaMA open-source model family; democratized access to foundation models' },
+        { name: 'Stability AI', type: 'Company', contribution: 'Stable Diffusion — open-source image generation' },
+        { name: 'Midjourney', type: 'Company', contribution: 'Consumer image generation; demonstrated creative AI to mainstream' },
+        { name: 'Hugging Face', type: 'Platform', contribution: 'Model hub; democratized access to pre-trained models and fine-tuning' },
+      ],
+      milestones: [
+        { year: 'Jun 2018', event: 'GPT-1: OpenAI demonstrates generative pre-training on language' },
+        { year: 'Feb 2019', event: 'GPT-2: "too dangerous to release" — sparked AI safety debate' },
+        { year: 'May 2020', event: 'GPT-3 (175B params): few-shot learning emerges; API launched' },
+        { year: 'Jan 2021', event: 'DALL-E: text-to-image generation via Transformer' },
+        { year: 'Mar 2022', event: 'InstructGPT: RLHF aligns GPT-3 to follow instructions' },
+        { year: 'Aug 2022', event: 'Stable Diffusion released open-source; image generation democratized' },
+        { year: 'Nov 2022', event: 'ChatGPT launches — 1 million users in 5 days; 100M in 2 months' },
+        { year: 'Mar 2023', event: 'GPT-4 released; passes bar exam, SAT, medical boards' },
+        { year: 'Mar 2023', event: 'LLaMA (Meta) leaked — open-source era begins' },
+      ],
+      impact: {
+        enabled: [
+          'AI-assisted coding (GitHub Copilot, Cursor, Replit)',
+          'AI writing assistants (Jasper, Copy.ai, Notion AI)',
+          'AI image generation (Midjourney, DALL-E, Stable Diffusion)',
+          'AI search (Bing Chat, Perplexity, You.com)',
+          'AI customer service and support automation',
+          'Code generation, debugging, and documentation at scale',
+        ],
+        changed: 'Generative AI collapsed the cost of producing text, code, and images by orders of magnitude. Knowledge work that required hours — writing a memo, summarizing a document, drafting code — became seconds. Every software product category acquired a "with AI" variant.',
+        industry: '$200B+ invested in generative AI companies 2022–2024. Every major enterprise software vendor added generative AI features. New job categories (prompt engineer, AI product manager) emerged. AI governance became a board-level concern.',
+      },
+    },
   },
   {
     id: 3,
@@ -61,6 +188,72 @@ export const eras = [
     leadingCompanies: ['LangChain', 'CrewAI', 'Microsoft AutoGen', 'OpenAI'],
     gap: 'Fragmented actions, inconsistent behavior, orchestration gaps, lack of enterprise governance, and cost explosion.',
     leadsTo: 'Cognitive AI',
+    detail: {
+      overview: {
+        summary: 'The Agentic AI Era unlocked AI systems that don\'t just respond to prompts — they reason about goals, make plans, use tools, and take multi-step actions in the real world. Where generative AI produced content, agentic AI produces outcomes. An agent can browse the web, write and execute code, search databases, send emails, and chain these actions together to complete complex tasks autonomously.',
+        why: 'Function calling (OpenAI, 2023) was the catalyst — a structured interface for LLMs to invoke external tools. Combined with chain-of-thought prompting and the ReAct framework, LLMs could now reason about which tool to call, call it, observe the result, and reason about the next step.',
+        significance: 'Agentic AI made LLMs into actors, not just advisors. For the first time, an AI system could complete a task end-to-end — "research this topic and write a report" — without human intervention at every step.',
+        quote: '"An agent is an AI that perceives its environment and takes actions to achieve its goals." — Russell & Norvig',
+      },
+      concepts: [
+        {
+          title: 'ReAct (Reason + Act)',
+          explanation: 'A prompting framework that interleaves Thought, Action, and Observation steps. The model thinks about what to do (Thought), invokes a tool (Action), receives the result (Observation), and reasons about the next step. This cycle repeats until the task is complete. ReAct dramatically improved tool use reliability over pure action-only approaches.',
+        },
+        {
+          title: 'Chain-of-Thought (CoT) Prompting',
+          explanation: 'Prompting the model to reason step-by-step before producing an answer ("Let\'s think step by step..."). CoT dramatically improves performance on multi-step reasoning tasks — math, logic, planning — because the intermediate reasoning steps scaffold the final answer. Emergent in models above ~100B parameters.',
+        },
+        {
+          title: 'Function Calling / Tool Use',
+          explanation: 'A structured mechanism for LLMs to invoke external tools. The model receives a JSON schema describing available tools (name, description, parameters). When it needs to use one, it outputs a structured JSON call. The host application executes the call and returns the result to the model. Enables: web search, code execution, database queries, API calls.',
+        },
+        {
+          title: 'Reflection & Self-Critique',
+          explanation: 'An agent reviews its own outputs against a goal or set of criteria, identifies gaps, and revises. Implemented as a separate "critic" step in the agent loop. Reflexion (2023) showed that agents with self-reflection significantly outperform those without on coding and decision-making tasks.',
+        },
+        {
+          title: 'Multi-Agent Systems',
+          explanation: 'Multiple specialized agents working together, each responsible for a specific sub-task. A supervisor agent decomposes a goal into tasks and assigns them to specialist agents. Results are aggregated and reviewed. This enables complex workflows that exceed the context window or capability of any single agent.',
+        },
+        {
+          title: 'Memory Systems',
+          explanation: 'Agents can maintain memory beyond the context window using: (1) In-context memory — the current conversation; (2) External memory — a vector database for semantic retrieval of past interactions; (3) Episodic memory — logs of past actions and outcomes. Memory enables agents to learn from experience and maintain state across sessions.',
+        },
+      ],
+      players: [
+        { name: 'LangChain', type: 'Framework', contribution: 'First major agent framework; chains, tools, memory abstractions; huge developer adoption' },
+        { name: 'AutoGPT', type: 'Project', contribution: 'First viral autonomous agent (Apr 2023); demonstrated long-horizon task execution' },
+        { name: 'Microsoft AutoGen', type: 'Framework', contribution: 'Multi-agent conversation framework; strong research backing' },
+        { name: 'CrewAI', type: 'Framework', contribution: 'Role-based multi-agent teams; production-oriented design' },
+        { name: 'OpenAI', type: 'Lab', contribution: 'Function calling API; Assistants API; GPT-4 as dominant agent brain' },
+        { name: 'Anthropic', type: 'Lab', contribution: 'Claude tool use; Constitutional AI for agent safety' },
+        { name: 'BabyAGI', type: 'Project', contribution: 'Task management agent; demonstrated goal-directed autonomous operation' },
+      ],
+      milestones: [
+        { year: 'Jan 2022', event: 'Chain-of-Thought prompting paper — Google Research' },
+        { year: 'Mar 2022', event: 'ReAct: Synergizing Reasoning and Acting — Princeton/Google' },
+        { year: 'Mar 2023', event: 'AutoGPT goes viral on GitHub — first widely-tested autonomous agent' },
+        { year: 'Apr 2023', event: 'BabyAGI — task-management autonomous agent' },
+        { year: 'Jun 2023', event: 'OpenAI Function Calling API — enables structured tool use' },
+        { year: 'Oct 2023', event: 'Reflexion paper — self-reflective agents surpass non-reflective on benchmarks' },
+        { year: 'Nov 2023', event: 'OpenAI Assistants API — managed agent infrastructure' },
+        { year: '2024', event: 'CrewAI, AutoGen, LangGraph reach production maturity' },
+        { year: '2024', event: 'Devin (Cognition) — autonomous software engineer agent' },
+      ],
+      impact: {
+        enabled: [
+          'AI coding agents (Devin, GitHub Copilot Workspace, Cursor Agent)',
+          'AI research assistants (Perplexity, Elicit)',
+          'Automated data analysis workflows',
+          'AI customer service agents with tool access',
+          'Software testing and QA automation',
+          'Document processing pipelines with verification steps',
+        ],
+        changed: 'Agentic AI shifted the unit of AI value from "response quality" to "task completion." The question was no longer "how good is the model\'s answer?" but "can the agent complete this 20-step workflow reliably?" This exposed new failure modes: hallucinated tool calls, infinite loops, accumulated errors, and the need for human oversight at key decision points.',
+        industry: 'Every enterprise software platform added "agent" capabilities. The agent framework ecosystem exploded — LangChain went from 0 to 80,000 GitHub stars in one year. New job titles: AI Agent Engineer, LLMOps Engineer. Enterprise "AI automation" spending shifted from RPA to AI agents.',
+      },
+    },
   },
   {
     id: 4,
@@ -79,6 +272,70 @@ export const eras = [
     leadingCompanies: ['LangGraph', 'Anthropic', 'LlamaIndex'],
     gap: 'Still missing persistent enterprise cognition, deep cross-system workflows, enterprise-scale memory management, and governed runtime systems.',
     leadsTo: 'AI Digital Workers',
+    detail: {
+      overview: {
+        summary: 'Cognitive AI / Compound AI Systems represented the maturation of agentic AI into structured, orchestrated intelligence. Rather than chains of ad-hoc tool calls, this era introduced architectures that mirror human cognitive processes — planning, reflection, evaluation, re-planning. The key insight: individual AI systems are limited by single-model capabilities, but compound systems combining multiple models, retrievers, evaluators, and orchestrators can far exceed what any single model achieves.',
+        why: 'Single-model agents were brittle — they hallucinated, looped, and accumulated errors over long workflows. Compound architectures added independent evaluation layers (LLM judges), explicit state management (workflow graphs), and structured recovery mechanisms that made AI systems reliable enough for production use cases.',
+        significance: 'This era produced the first AI systems that enterprises could trust with real business workflows — not because individual models became perfect, but because compound architectures could detect and correct errors at multiple layers.',
+        quote: '"The shift from models to systems is the defining architectural change of this era." — Hamel Husain, 2024',
+      },
+      concepts: [
+        {
+          title: 'Cognitive Architecture',
+          explanation: 'A structured design pattern for AI systems that mirrors cognitive science concepts — perception, reasoning, planning, memory, action, reflection. Rather than a single prompt loop, a cognitive architecture explicitly separates concerns: an agent perceives state, retrieves relevant memory, reasons over the situation, plans a sequence of actions, executes, and reflects on the outcome.',
+        },
+        {
+          title: 'LLM-as-Judge',
+          explanation: 'Using a second LLM to evaluate the output of a primary LLM. The judge model receives the output and a rubric, then scores it on dimensions like accuracy, completeness, relevance, and safety. LLM judges are faster and cheaper than human evaluation at scale, and more consistent than rule-based metrics for complex outputs.',
+        },
+        {
+          title: 'Workflow Graphs (LangGraph)',
+          explanation: 'Representing AI workflows as explicit directed graphs where nodes are processing steps and edges are transitions (including conditional branches). This replaces brittle sequential chains with robust stateful workflows. LangGraph introduced: persistent checkpointing, conditional edges, parallel branches, and human-in-the-loop nodes.',
+        },
+        {
+          title: 'Model Context Protocol (MCP)',
+          explanation: 'Anthropic\'s open standard (Nov 2024) for connecting AI models to tools, data sources, and services. MCP defines a universal protocol — like USB for AI — so any MCP-compatible tool works with any MCP-compatible model. This ended the fragmented tool integration landscape where each framework had proprietary tool schemas.',
+        },
+        {
+          title: 'Mixture of Experts (MoE)',
+          explanation: 'Instead of activating all model parameters for every token, MoE models route each token to a subset of "expert" sub-networks via a learned gating mechanism. This enables much larger models (1T+ parameters) while keeping inference cost similar to much smaller dense models — by only activating ~10-20% of parameters per token. GPT-4 and Mixtral use MoE.',
+        },
+        {
+          title: 'RAG (Retrieval-Augmented Generation)',
+          explanation: 'Augmenting LLM generation with relevant context retrieved from an external knowledge base. A retriever embeds the query, finds semantically similar documents from a vector store, and injects them into the prompt. RAG reduces hallucination on knowledge-intensive tasks and keeps information current without retraining.',
+        },
+      ],
+      players: [
+        { name: 'LangGraph (LangChain)', type: 'Framework', contribution: 'Stateful workflow graphs for production agents; became the standard for complex agent orchestration' },
+        { name: 'Anthropic', type: 'Lab', contribution: 'Model Context Protocol (MCP); Constitutional AI; Claude models with extended context' },
+        { name: 'LlamaIndex', type: 'Framework', contribution: 'Enterprise RAG and knowledge management; agentic RAG patterns' },
+        { name: 'Llama 3 / Meta', type: 'Model', contribution: 'Open weights at GPT-4 quality; enabled on-premise compound AI systems' },
+        { name: 'Mistral AI', type: 'Lab', contribution: 'Mixture of Experts (Mixtral); European frontier model lab' },
+        { name: 'DSPy (Stanford)', type: 'Framework', contribution: 'Programmatic LLM pipeline optimization; automatic prompt tuning' },
+      ],
+      milestones: [
+        { year: 'Jan 2024', event: 'LangGraph 0.1 released — stateful agent workflows with checkpointing' },
+        { year: 'Mar 2024', event: 'Claude 3 Opus — sets new SOTA across reasoning benchmarks' },
+        { year: 'Apr 2024', event: 'LLaMA 3 — open-weights model competitive with GPT-4' },
+        { year: 'May 2024', event: 'GPT-4o — multimodal capabilities with real-time voice' },
+        { year: 'Jul 2024', event: 'Compound AI Systems paper — Berkeley BAIR formalizes the concept' },
+        { year: 'Nov 2024', event: 'Model Context Protocol (MCP) — Anthropic open-sources universal tool standard' },
+        { year: 'Dec 2024', event: 'o1 / reasoning models — extended chain-of-thought as native capability' },
+        { year: '2025', event: 'MCP ecosystem explodes — hundreds of tools, servers, and integrations' },
+      ],
+      impact: {
+        enabled: [
+          'Production-grade AI workflows with structured error recovery',
+          'Enterprise RAG systems for large document corpora',
+          'AI code review pipelines with multi-model evaluation',
+          'Multi-agent research and analysis systems',
+          'AI systems with explicit human oversight gates',
+          'Standardized tool ecosystems via MCP',
+        ],
+        changed: 'Cognitive AI moved AI from demos to production. The question shifted from "can AI do this?" to "how do we make AI do this reliably at scale?" Compound architectures added the reliability layer that agentic AI lacked — independent evaluation, explicit state, structured error handling.',
+        industry: 'Enterprise AI procurement shifted from buying models to buying compound AI systems. MLOps evolved into LLMOps with specific tooling for prompt management, evaluation pipelines, and agent monitoring. AI governance emerged as a critical enterprise function.',
+      },
+    },
   },
   {
     id: 5,
@@ -98,6 +355,69 @@ export const eras = [
     leadingCompanies: ['CrewAI', 'Microsoft', 'Salesforce'],
     gap: 'Digital workers needed dynamic, executable, intelligent, and adaptive synthetic workflows to operate at enterprise scale.',
     leadsTo: 'Generative Execution Engines',
+    detail: {
+      overview: {
+        summary: 'The AI Digital Workers Era marks the transition from AI as a tool that assists humans to AI as a workforce that operates alongside humans. Where previous eras produced agents that execute tasks, this era produced digital workers that fill roles — with defined responsibilities, performance expectations, specialized skills, and governance structures that mirror human workforce management.',
+        why: 'As compound AI systems matured, enterprises discovered that organizing AI around roles rather than tasks produced more reliable, accountable, and governable outcomes. A ResearchAgent with a defined profile, tool set, and performance KPIs is far easier to manage than a generic agent that does anything.',
+        significance: 'AI Digital Workers represent the first AI paradigm that maps directly to how enterprises think about their workforce — org charts, roles, teams, performance reviews, onboarding, and governance. This made AI adoption legible to business leaders, not just technologists.',
+        quote: '"The question is no longer how many FTEs a company has, but how many AI workers and human workers they have." — Industry observation, 2025',
+      },
+      concepts: [
+        {
+          title: 'Worker Role Architecture',
+          explanation: 'Each AI digital worker is defined by a role specification: what business function they perform, what tools they may use, what data they may access, what decisions they may make autonomously, and what requires escalation. This maps directly to a human job description, making AI workers governable within existing HR and compliance frameworks.',
+        },
+        {
+          title: 'Workforce Orchestration',
+          explanation: 'A supervisor agent (or human manager) allocates tasks across a team of specialized digital workers. Unlike generic multi-agent systems, workforce orchestration mirrors human team management: task assignment based on worker capability, load balancing, handoff protocols between workers, quality reviews by senior workers.',
+        },
+        {
+          title: 'Specialization and Depth',
+          explanation: 'Digital workers are deeply specialized — a financial analysis worker is fine-tuned on financial data and given tools specific to financial analysis. Specialization produces higher quality output than generalist agents because the model\'s context and tool access are optimized for the specific domain.',
+        },
+        {
+          title: 'Worker Governance and Compliance',
+          explanation: 'AI digital workers operate under governance frameworks that define their authorized scope. Tool permissions, data access levels, decision authority, and escalation rules are explicitly defined and enforced — not emergent from prompts. This mirrors employment governance: workers have defined roles, managers have oversight, compliance teams audit.',
+        },
+        {
+          title: 'Performance KPIs and Accountability',
+          explanation: 'Digital workers are evaluated against measurable performance metrics: task completion rate, output quality scores, policy compliance rate, cost per task, latency. These metrics enable workforce management practices — identifying high-performing workers, retraining underperformers, optimizing team composition.',
+        },
+        {
+          title: 'Digital Labor Economics',
+          explanation: 'AI digital workers create a new economic category: digital labor costs that sit between software licensing (fixed) and human labor (variable). Enterprises must manage AI worker costs, optimize worker utilization, and measure the ROI of digital workers relative to human workers performing equivalent functions.',
+        },
+      ],
+      players: [
+        { name: 'CrewAI', type: 'Framework', contribution: 'Role-based multi-agent framework; "crew" metaphor for AI workforce teams' },
+        { name: 'Microsoft', type: 'Platform', contribution: 'Microsoft 365 Copilot; Copilot Wave 2 with autonomous AI workers across Office' },
+        { name: 'Salesforce', type: 'Platform', contribution: 'Agentforce — AI workers for sales, service, marketing within CRM workflows' },
+        { name: 'ServiceNow', type: 'Platform', contribution: 'AI workers for ITSM; Now Assist autonomous agents' },
+        { name: 'Workday', type: 'Platform', contribution: 'AI workers for HR and finance workflows' },
+        { name: 'SAP', type: 'Platform', contribution: 'Joule AI workers integrated across SAP enterprise suite' },
+      ],
+      milestones: [
+        { year: 'Sep 2024', event: 'Salesforce Agentforce launched — enterprise AI worker platform' },
+        { year: 'Oct 2024', event: 'Microsoft Copilot Wave 2 — autonomous AI workers in Microsoft 365' },
+        { year: '2025', event: 'CrewAI Enterprise reaches production adoption in Fortune 500' },
+        { year: '2025', event: 'AI worker governance frameworks emerge as enterprise standard' },
+        { year: '2025', event: '"Digital worker" enters mainstream enterprise vocabulary' },
+        { year: '2026', event: 'AI Digital Workforce management platforms (ADW) standardized' },
+        { year: '2026', event: 'Enterprises begin reporting AI worker headcount alongside human headcount' },
+      ],
+      impact: {
+        enabled: [
+          'AI workers handling tier-1 and tier-2 customer service at scale',
+          'Automated financial analysis and reporting workflows',
+          'AI-driven sales development and prospect research',
+          'Document review, due diligence, and compliance checking',
+          'HR screening, onboarding automation, and policy Q&A',
+          'IT operations: incident triage, root cause analysis, resolution',
+        ],
+        changed: 'AI Digital Workers changed how enterprises think about workforce composition. Instead of asking "how do we automate this task?" enterprises began asking "should this role be a human worker, an AI worker, or a human-AI hybrid?" This had profound implications for org design, HR strategy, and workforce planning.',
+        industry: 'Workforce planning software added AI worker modeling. Gartner predicted 30% of enterprise knowledge work would involve AI workers by 2026. Labor economists began tracking "AI worker penetration" as a macroeconomic indicator. New governance roles emerged: AI Workforce Manager, Digital Labor Director.',
+      },
+    },
   },
   {
     id: 6,
@@ -118,6 +438,68 @@ export const eras = [
     leadingCompanies: ['CrewAI', 'Microsoft', 'Salesforce'],
     gap: 'Need to unify cognitive governance, align enterprise operations, and govern enterprise AI at scale.',
     leadsTo: 'AI Enterprise Operating Systems',
+    detail: {
+      overview: {
+        summary: 'Generative Execution Engines (GEE) represent the shift from AI systems that execute predefined workflows to AI systems that generate the workflows themselves. Instead of engineers designing process automation flows upfront, GEE uses LLM reasoning to translate enterprise intent into executable Directed Acyclic Graphs (DAGs) that can be immediately dispatched for execution. The workflow design cycle — which previously took weeks — becomes seconds.',
+        why: 'Enterprise operations are too complex and dynamic for static workflow design. Business conditions change, exceptions arise, and new scenarios constantly emerge. GEE addresses this by making workflow generation itself an AI capability — the system adapts the execution plan to the current situation, intermediate results, and available resources.',
+        significance: 'GEE marks the transition point where AI stops just executing enterprise tasks and starts designing how enterprise tasks should be executed. This is a fundamental shift in the locus of enterprise process intelligence — from human business analysts to AI systems that understand and generate enterprise operations.',
+        quote: '"We don\'t design workflows for AI to follow. AI designs workflows that are optimized for the current situation." — Emerging enterprise AI principle, 2026',
+      },
+      concepts: [
+        {
+          title: 'Intent-to-DAG Generation',
+          explanation: 'Given a natural language enterprise intent ("reduce procurement costs by 12% in Q1"), GEE decomposes it into a structured Directed Acyclic Graph of executable steps. Each node in the DAG specifies: which AI worker or tool executes it, required inputs and expected outputs, risk classification, and dependencies on other nodes. The entire DAG is generated in seconds.',
+        },
+        {
+          title: 'Dynamic Workflow Adaptation',
+          explanation: 'Unlike static workflow engines (Airflow, Temporal), GEE can modify the execution plan mid-run based on intermediate results. If a research step discovers unexpected data, GEE generates a revised workflow branch that addresses it — subject to governance validation before activation. This makes workflows intelligent, not just automated.',
+        },
+        {
+          title: 'Temporal Workflows for AI',
+          explanation: 'Temporal (the workflow engine) adapted for AI operations: long-running workflows that survive process restarts, exactly-once execution semantics for tool calls, compensation workflows for rollback, and event-driven workflow activation. GEE uses temporal primitives to make AI-generated workflows as reliable as traditional enterprise process automation.',
+        },
+        {
+          title: 'Agentic Kafka',
+          explanation: 'Apache Kafka adapted for event-driven AI agent coordination. AI workers publish events when they complete tasks; other workers subscribe to relevant event streams. GEE uses Kafka to coordinate parallel workflow branches, deliver intermediate results to the right downstream agents, and maintain an audit-grade event log of all workflow operations.',
+        },
+        {
+          title: 'Composable AI Services',
+          explanation: 'GEE-generated workflows compose discrete AI services — each optimized for a specific operation. A workflow might compose: a research service, a risk assessment service, a document generation service, and a compliance review service. Each service is independently versioned, scaled, and governed. Composability enables GEE workflows to be highly reliable even at large scale.',
+        },
+        {
+          title: 'Workflow Self-Evaluation',
+          explanation: 'Before dispatching a generated workflow, GEE evaluates its own output: Does this workflow actually achieve the stated intent? Are all required steps present? Are there logical inconsistencies? Are dependencies correctly specified? This self-evaluation pass significantly reduces workflow execution failures before they consume enterprise resources.',
+        },
+      ],
+      players: [
+        { name: 'Temporal Technologies', type: 'Platform', contribution: 'Temporal workflow engine adapted for AI-native durable execution' },
+        { name: 'Apache Kafka / Confluent', type: 'Platform', contribution: 'Event streaming backbone for AI agent coordination' },
+        { name: 'Dagster', type: 'Platform', contribution: 'Data-aware orchestration extended to AI workflow DAGs' },
+        { name: 'Prefect', type: 'Platform', contribution: 'Dynamic workflow generation with AI integration' },
+        { name: 'Agentiq', type: 'Startup', contribution: 'Native GEE platform for enterprise workflow generation' },
+        { name: 'Microsoft', type: 'Platform', contribution: 'Power Automate AI Builder; Azure Logic Apps with AI-generated flows' },
+      ],
+      milestones: [
+        { year: '2025', event: 'First enterprise GEE deployments in financial services and healthcare' },
+        { year: '2025', event: 'LangGraph integrates workflow generation — LLM generates graph structure' },
+        { year: '2026', event: 'AI-generated DAGs become standard output of enterprise AI planning systems' },
+        { year: '2026', event: 'Temporal + Kafka + AI agent orchestration platforms mature' },
+        { year: '2027', event: 'GEE generates and deploys >50% of net-new enterprise workflows at early adopters' },
+        { year: '2027', event: 'Workflow generation quality matches human-authored workflows on standard benchmarks' },
+      ],
+      impact: {
+        enabled: [
+          'Instant process automation without workflow engineering',
+          'Adaptive workflows that modify themselves based on business results',
+          'AI-native process mining and continuous workflow optimization',
+          'Self-healing workflows that detect and correct execution failures',
+          'Cross-system enterprise workflows generated from business intent alone',
+          'Workflow governance integrated into the generation layer',
+        ],
+        changed: 'GEE shifted process automation from a specialized engineering discipline to a business capability. Business analysts could describe what they needed in natural language and receive an executable workflow. This compressed months-long process automation projects into days and moved the bottleneck from "can we build this workflow?" to "is this workflow safe to execute?"',
+        industry: 'Business Process Management (BPM) vendors pivoted to AI-native workflow generation. Low-code/no-code platforms added GEE as a core capability. Enterprise architects began designing for AI-generated workflow surfaces. Governance of AI-generated workflows became a critical compliance requirement.',
+      },
+    },
   },
   {
     id: 7,
@@ -138,6 +520,68 @@ export const eras = [
     leadingCompanies: ['OpenAI', 'Anthropic', 'NVIDIA', 'Google Cloud'],
     gap: null,
     leadsTo: 'Next Frontier',
+    detail: {
+      overview: {
+        summary: 'The AI Enterprise Operating System (AI-EOS) is the culmination of the AI evolution — a platform that functions as the operating system for the entire enterprise. Just as Windows manages hardware resources and provides a stable platform for applications, AI-EOS manages AI resources (agents, models, memory, tools, workflows) and provides a governed platform for enterprise operations. At AI-EOS maturity, the enterprise runs on AI-native infrastructure from intent to execution.',
+        why: 'As enterprises accumulated AI agents, GEE workflows, digital workers, and AI-generated processes, they faced a critical coordination problem: how do you manage the entire portfolio of AI operations as a coherent system? AI-EOS answers this by providing a unified platform that coordinates all enterprise AI across a common intent layer, memory fabric, governance framework, and execution engine.',
+        significance: 'AI-EOS represents the endpoint of the enterprise AI evolution — not individual AI tools, not agent workflows, not digital workers — but a comprehensive AI runtime that governs, coordinates, and evolves the entire enterprise using AI as the foundational operating medium.',
+        quote: '"The OS of the future isn\'t Windows or macOS. It\'s an AI-native operating system that runs the enterprise." — Enterprise AI architecture principle, 2026+',
+      },
+      concepts: [
+        {
+          title: 'Enterprise Intent Layer',
+          explanation: 'A unified interface for expressing enterprise goals in natural language. Business stakeholders communicate what they want to achieve; AI-EOS parses, classifies, and decomposes the intent into executable AI operations. The intent layer abstracts all technical complexity — users operate at the level of business outcomes, not system configurations.',
+        },
+        {
+          title: 'Cognitive Operating Environment',
+          explanation: 'A persistent cognitive layer that maintains the enterprise\'s collective AI knowledge, reasoning history, and operational state across all AI systems. Where traditional IT systems manage data and processes, the cognitive environment manages enterprise knowledge and reasoning — enabling AI systems to build on prior insights and maintain continuity across operations.',
+        },
+        {
+          title: 'AI Memory Factory',
+          explanation: 'Enterprise-wide memory infrastructure that manages different memory types at scale: working memory (current operation context), episodic memory (history of past operations), semantic memory (enterprise knowledge graph), procedural memory (workflows and patterns that have succeeded). The Memory Factory governs all writes — ensuring integrity, lineage, and authorized access.',
+        },
+        {
+          title: 'Enterprise Cognitive Governance (ECG)',
+          explanation: 'The governance layer built into AI-EOS that ensures all AI operations are authorized, compliant, explainable, and economically governed. ECG includes the Cognitive Policy Engine, Cognitive Risk Engine, LLM Judge Layer, Explainability Engine, AI FinOps Engine, and Human Oversight Layer — all operating automatically as part of the AI-EOS runtime.',
+        },
+        {
+          title: 'Purpose Bus',
+          explanation: 'A semantic message bus that routes enterprise intent to the right AI systems. Unlike traditional message buses that route data, the Purpose Bus routes goals — translating high-level business objectives into the right sequence of AI operations across the enterprise. It coordinates between GEE (workflow generation), ADW (digital workers), and ECG (governance) transparently.',
+        },
+        {
+          title: 'Self-Evolution Mechanisms',
+          explanation: 'AI-EOS learns from every enterprise operation and continuously improves its routing, workflow patterns, agent configurations, and governance rules based on outcomes. Poorly performing AI workers are retrained. Successful workflow patterns become templates. Governance rules are refined based on incident feedback. The enterprise AI system improves without human-initiated updates.',
+        },
+      ],
+      players: [
+        { name: 'OpenAI', type: 'Lab/Platform', contribution: 'Operator and user framework for AI-EOS-like governance; enterprise ChatGPT platform evolution' },
+        { name: 'Anthropic', type: 'Lab/Platform', contribution: 'Claude models as enterprise cognitive runtime; ECG framework contributions' },
+        { name: 'NVIDIA', type: 'Hardware/Platform', contribution: 'NIM (NVIDIA Inference Microservices); AI-native enterprise infrastructure stack' },
+        { name: 'Google Cloud', type: 'Platform', contribution: 'Vertex AI Agent Builder; enterprise AI-EOS foundations' },
+        { name: 'Microsoft', type: 'Platform', contribution: 'Microsoft Copilot as AI-EOS entry point for Microsoft-centric enterprises' },
+        { name: 'ServiceNow / SAP / Salesforce', type: 'Platform', contribution: 'Vertical AI-EOS implementations within their enterprise domains' },
+      ],
+      milestones: [
+        { year: '2026', event: 'First AI-EOS deployments in technology-forward enterprises' },
+        { year: '2026', event: 'Enterprise AI orchestration platforms reach AI-EOS architecture maturity' },
+        { year: '2027', event: 'AI-EOS becomes standard enterprise architecture pattern at major cloud providers' },
+        { year: '2028', event: 'Fortune 500 enterprises report AI-EOS as core infrastructure alongside ERP and cloud' },
+        { year: '2029', event: 'AI-native enterprises operating without legacy application stacks at leading edge' },
+        { year: '2030+', event: 'Self-evolving, self-governing AI-native enterprises reach frontier organizations' },
+      ],
+      impact: {
+        enabled: [
+          'Enterprises that operate and optimize themselves using AI',
+          'Real-time enterprise strategy execution from board-level intent to operational action',
+          'AI-native finance, HR, supply chain, and customer operations',
+          'Continuous enterprise optimization — AI improves operations 24/7',
+          'Regulatory compliance managed autonomously by AI governance layer',
+          'Enterprise knowledge that grows and improves over time without manual curation',
+        ],
+        changed: 'AI-EOS completes the inversion of enterprise IT — from humans using software to software enabling humans. In the AI-EOS era, humans define strategic intent and authorize key decisions; AI-EOS handles everything between intent and outcome. The enterprise becomes a governed AI-native system where human creativity and judgment are amplified, not replaced.',
+        industry: 'Traditional ERP vendors face existential competition from AI-EOS platforms. Cloud providers compete on AI-EOS capabilities, not just compute. CIOs are replaced by Chief AI Officers as the dominant enterprise technology role. Business schools redesign MBA programs around AI-native enterprise management.',
+      },
+    },
   },
 ]
 

@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+
 export default function EraCard({ era, index }) {
   const isEven = index % 2 === 0
 
@@ -172,18 +174,34 @@ export default function EraCard({ era, index }) {
             </div>
           )}
 
-          {/* Leads to */}
-          {era.leadsTo && (
-            <div className="mt-3 flex items-center gap-2">
-              <span className="text-xs text-slate-600">This led to</span>
-              <span
-                className="text-xs font-semibold px-2 py-0.5 rounded-full"
-                style={{ backgroundColor: `${era.accent}20`, color: era.accent, border: `1px solid ${era.accent}40` }}
-              >
-                {era.leadsTo} →
-              </span>
-            </div>
-          )}
+          {/* Footer row: leads-to + deep dive */}
+          <div className="mt-3 flex items-center justify-between gap-2 flex-wrap">
+            {era.leadsTo && (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-slate-600">This led to</span>
+                <span
+                  className="text-xs font-semibold px-2 py-0.5 rounded-full"
+                  style={{ backgroundColor: `${era.accent}20`, color: era.accent, border: `1px solid ${era.accent}40` }}
+                >
+                  {era.leadsTo} →
+                </span>
+              </div>
+            )}
+            <Link
+              href={`/era/${era.id}`}
+              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-200 hover:scale-105 ml-auto"
+              style={{
+                backgroundColor: `${era.accent}20`,
+                color: era.accent,
+                border: `1px solid ${era.accent}40`,
+              }}
+            >
+              Deep Dive
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
